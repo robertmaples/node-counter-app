@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "reStart": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/robertmaples/node-counter-app/issues"
   },
-  "homepage": "https://github.com/robertmaples/node-counter-app#readme"
+  "homepage": "https://github.com/robertmaples/node-counter-app#readme",
+  "dependencies": {
+    "@hapi/hapi": "^20.2.1",
+    "apollo-server": "^3.6.3",
+    "graphql-tools": "^8.2.0",
+    "mongoose": "^6.2.4"
+  }
 }
