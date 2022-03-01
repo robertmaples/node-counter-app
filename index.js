@@ -1,18 +1,16 @@
 const hapi = require('@hapi/hapi');
 const mongoose = require('mongoose');
 const { apolloHapi, graphiqlHapi } = require('apollo-server');
-const { makeExecutableSchema } = require('graphql-tools');
+const { makeExecutableSchema } = require('@graphql-tools/schema');
 
 const Counter = require('./models/counter');
 
 const graphqlSchema = require('./graphql/schema');
 const createResolvers = require('./graphql/resolvers');
 
-const server = new hapi.Server();
-
-server.connection({
-    host: 'localhost',
-    port: 8080
+const server = hapi.Server({
+    port: 8080,
+    host: 'localhost'
 });
 
 mongoose.connect('mongodb://localhost:27017/test')
@@ -35,10 +33,12 @@ server.register({
 
 server.register({
     register: graphiqlHapi,
-    options: '/graphiql',
-    graphiqlOptions: {
-        endpointUrl: '/graphql'
-    }
+    options: {
+        path: '/graphiql',
+        graphiqlOptions: {
+            endpointUrl: '/graphql'
+        }
+    },
 });
 
 server.start((err) => {

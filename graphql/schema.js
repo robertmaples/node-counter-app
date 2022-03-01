@@ -7,7 +7,7 @@ const schema = `
         getCounterById(id: ID!): Counter
     }
     type Mutation {
-        createCounter(): Counter
+        createCounter: Counter
         incrementCounter(id: ID!): Counter
     }
     schema {

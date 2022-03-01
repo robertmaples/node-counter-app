@@ -18,9 +18,9 @@
   },
   "homepage": "https://github.com/robertmaples/node-counter-app#readme",
   "dependencies": {
+    "@graphql-tools/schema": "^8.3.2",
     "@hapi/hapi": "^20.2.1",
     "apollo-server": "^3.6.3",
-    "graphql-tools": "^8.2.0",
     "mongoose": "^6.2.4"
   }
 }
