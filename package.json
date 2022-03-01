@@ -1,0 +1,19 @@
+{
+  "name": "counter-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robertmaples/node-counter-app.git"
+  },
+  "author": "Robert Maples",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robertmaples/node-counter-app/issues"
+  },
+  "homepage": "https://github.com/robertmaples/node-counter-app#readme"
+}
