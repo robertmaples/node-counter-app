@@ -8,7 +8,7 @@ const typeDefs = gql`
         value: Int!
     }
     type Query {
-        getCounterById(id: String!): Counter
+        getCounter(id: String!): Counter
         getCounters: [Counter]
     }
     type Mutation {
@@ -28,11 +28,9 @@ const counters = [
     },
 ];
 
-// Resolvers define the technique for fetching the types defined in the
-// schema. This resolver retrieves books from the "books" array above.
 const resolvers = {
-    Query: {
-        getCounterById: (parent, args, context, info) => counters.find(c => c.id === args.id),
+Query: {
+        getCounter: (parent, args) => counters.find(c => c.id === args.id),
         getCounters: () => counters
     },
     Mutation: {
@@ -42,8 +40,8 @@ const resolvers = {
             counters.push(counter)
             return counter
         },
-        incrementCounter: (id) => {
-            const counter = counters.find(id);
+        incrementCounter: (parent, args) => {
+            const counter = counters.find(c => c.id === args.id);
 
             counter.value = counter.value + 1;
             return counter;
