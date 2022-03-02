@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "reStart": "nodemon index.js"
+    "restart": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -18,9 +18,9 @@
   },
   "homepage": "https://github.com/robertmaples/node-counter-app#readme",
   "dependencies": {
-    "@graphql-tools/schema": "^8.3.2",
     "@hapi/hapi": "^20.2.1",
-    "apollo-server": "^3.6.3",
-    "mongoose": "^6.2.4"
+    "apollo-server-hapi": "^3.6.3",
+    "mongoose": "^6.2.4",
+    "uuid": "^8.3.2"
   }
 }
