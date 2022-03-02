@@ -32,10 +32,7 @@ const counters = [
 // schema. This resolver retrieves books from the "books" array above.
 const resolvers = {
     Query: {
-        getCounterById: (id) => {
-            console.log('id', id, 'counters.find', counters.find(id))
-            counters.find(id)
-        },
+        getCounterById: (parent, args, context, info) => counters.find(c => c.id === args.id),
         getCounters: () => counters
     },
     Mutation: {
