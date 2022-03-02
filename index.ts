@@ -1,10 +1,16 @@
-const { ApolloServer, ApolloServerPluginStopHapiServer, gql } = require('apollo-server-hapi')
-const hapi = require('@hapi/hapi')
-const { v4: uuidv4 } = require('uuid');
+import {ApolloServer, ApolloServerPluginStopHapiServer, gql} from "apollo-server-hapi";
+import {Server} from "hapi"
+import { v4 as uuidv4 } from "uuid"
+
+
+interface Counter {
+    id: string;
+    value: number;
+}
 
 const typeDefs = gql`
     type Counter {
-        id: String!    
+        id: String!
         value: Int!
     }
     type Query {
@@ -17,7 +23,7 @@ const typeDefs = gql`
     }
 `;
 
-const counters = [
+const counters: Counter[] = [
     {
         id: '9d0a8a68-f9a4-4464-9619-980c9db85eff',
         value: 100
@@ -29,8 +35,8 @@ const counters = [
 ];
 
 const resolvers = {
-Query: {
-        getCounter: (parent, args) => counters.find(c => c.id === args.id),
+    Query: {
+        getCounter: (parent, args: {id: string}) => counters.find(c => c.id === args.id),
         getCounters: () => counters
     },
     Mutation: {
@@ -40,25 +46,28 @@ Query: {
             counters.push(counter)
             return counter
         },
-        incrementCounter: (parent, args) => {
+        incrementCounter: (parent, args: {id: string}) => {
             const counter = counters.find(c => c.id === args.id);
 
-            counter.value = counter.value + 1;
+           if (counter) {
+               counter.value = counter.value + 1;
+           }
+
             return counter;
         }
     }
 };
 
 async function startApolloServer(typeDefs, resolvers) {
-    const app = hapi.server({ port: 4000 });
+    const app = new Server({port: 4000 })
     const server = new ApolloServer({
         typeDefs,
         resolvers,
-        plugins: [ApolloServerPluginStopHapiServer({ hapiServer: app })],
+        plugins: [ApolloServerPluginStopHapiServer({hapiServer: app})],
     });
 
     await server.start();
-    await server.applyMiddleware({ app });
+    await server.applyMiddleware({app});
     await app.start();
 }
 
